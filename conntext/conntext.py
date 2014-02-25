@@ -11,15 +11,13 @@ from .error import DatabaseNotSupported
 DB_TYPE_MYSQL = 0
 DB_TYPE_SQLITE = 1
 
-DB_TYPES = (DB_TYPE_MYSQL, DB_TYPE_SQLITE,)
-
 connect = {DB_TYPE_MYSQL: partial(mysql.connect),
            DB_TYPE_SQLITE: partial(sqlite.connect)}
 
 
 @contextmanager
 def conn(type_, *args, **kwargs):
-    if type_ not in DB_TYPES:
+    if type_ not in connect.keys():
         raise DatabaseNotSupported("Type not supported: {0}".format(type_))
 
     conn = connect[type_](*args, **kwargs)
