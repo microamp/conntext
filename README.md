@@ -1,20 +1,21 @@
 conntext
 ========
 
-Context managers for MySQL/SQLite connectivity
+Context managers for database connectivity
 
-requirements
-------------
-* MySQL-python>=1.2.5 (for MySQL)
-* pysqlite>=2.b6.3 (for SQLite)
+Goals
+-----
+* Encourage use of SQL (no ORM)
+* Each context is a single atomic process ("either all occur, or nothing occurs")
+* No manual ``commit`` (success), ``rollback`` (fail) or ``close`` (always)
 
-
-usage
+Usage
 -----
 ```
-from conntext.conntext import conn, cursor, DB_TYPE_SQLITE
+from conntext.conntext import conn, cursor
+import sqlite3 as sqlite
 
-with conn(DB_TYPE_SQLITE, "/tmp/conntexttest") as conn:
+with conn(sqlite.connect, ":memory:") as conn:
     with cursor(conn) as cursor:
-        cursor.execute("some sql query here")
+        cursor.execute("your_sql_statement")
 ```

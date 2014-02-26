@@ -1,30 +1,18 @@
 #-*- coding: utf-8 -*-
 
 from contextlib import contextmanager
-from functools import partial
+from logging import getLogger
 
-import MySQLdb as mysql
-import sqlite3 as sqlite
-
-from .error import DatabaseNotSupported
-
-DB_TYPE_MYSQL = 0
-DB_TYPE_SQLITE = 1
-
-connect = {DB_TYPE_MYSQL: partial(mysql.connect),
-           DB_TYPE_SQLITE: partial(sqlite.connect)}
+logger = getLogger(__name__)
 
 
 @contextmanager
-def conn(type_, *args, **kwargs):
-    if type_ not in connect.keys():
-        raise DatabaseNotSupported("Type not supported: {0}".format(type_))
-
-    conn = connect[type_](*args, **kwargs)
-
+def conn(connect, *args, **kwargs):
+    conn = connect(*args, **kwargs)
     try:
         yield conn
-    except:
+    except Exception as e:
+        logger.error(e.message)
         conn.rollback()
         raise
     else:
@@ -36,10 +24,10 @@ def conn(type_, *args, **kwargs):
 @contextmanager
 def cursor(conn):
     cursor = conn.cursor()
-
     try:
         yield cursor
-    except:
+    except Exception as e:
+        logger.error(e.message)
         raise
     finally:
         cursor.close()

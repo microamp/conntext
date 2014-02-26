@@ -14,7 +14,7 @@ if sys.argv[-1] == "publish":
     os.system("python setup.py sdist upload")
     sys.exit()
 
-short = "Context managers for MySQL/SQLite connectivity"
+short = "Context managers for database connectivity"
 
 setup(name="conntext",
       version=conntext.__version__,
@@ -25,7 +25,7 @@ setup(name="conntext",
       packages=["conntext"],
       package_data={"": ["LICENSE", "README.md"]},
       include_package_data=True,
-      install_requires=["MySQL-python>=1.2.5", "pysqlite>=2.6.3"],
+      install_requires=[],
       license=open("LICENSE").read(),
       zip_safe=False,
       classifiers=("Development Status :: 2 - Pre-Alpha",
@@ -33,4 +33,7 @@ setup(name="conntext",
                    "Natural Language :: English",
                    "License :: OSI Approved :: Apache Software License",
                    "Programming Language :: Python",
-                   "Programming Language :: Python :: 2.7"))
+                   "Programming Language :: Python :: 2.7",
+                   "Programming Language :: Python :: 3.1",
+                   "Programming Language :: Python :: 3.2",
+                   "Programming Language :: Python :: 3.3"))
