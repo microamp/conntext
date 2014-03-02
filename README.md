@@ -15,7 +15,7 @@ Usage
 from conntext.conntext import conn, cursor
 import sqlite3 as sqlite
 
-with conn(sqlite.connect, ":memory:", factory=sqlite.Row) as conn:
-    with cursor(conn) as cursor:
-        cursor.execute("your_sql_statement")
+with conn(sqlite.connect, ":memory:", factory=sqlite.Row) as conn_:
+    with cursor(conn_) as cursor_:
+        cursor_.execute("your_sql_statement")
 ```
