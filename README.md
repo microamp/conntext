@@ -1,13 +1,13 @@
-conntext
+Conntext
 ========
 
-Context managers for database connectivity
+Context managers for secure and atomic database connectivity
 
 Goals
 -----
-* Encourage use of SQL (no ORM)
-* Each context is a single atomic process ("either all occur, or nothing occurs")
+* Make each context a single atomic process ("either all occur, or nothing occurs")
 * No manual ``commit`` (success), ``rollback`` (fail) or ``close`` (always)
+* Encourage direct use of SQL (no ORM)
 
 Usage
 -----
