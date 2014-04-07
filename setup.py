@@ -1,39 +1,44 @@
-#!/usr/bin/env python
+## conntext - Context managers for secure and atomic database connectivity
+## Copyright (C) 2014  James Nah <sangho.nah@gmail.com>
+##
+## This library is free software: you can redistribute it and/or
+## modify it under the terms of the GNU Lesser General Public License
+## as published by the Free Software Foundation, either version 3 of
+## the License, or (at your option) any later version.
+##
+## This library is distributed in the hope that it will be useful, but
+## WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+## Lesser General Public License for more details.
+##
+## You should have received a copy of the GNU Lesser General Public
+## License along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import os
-import sys
+from setuptools import setup
 
 import conntext
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
-
-if sys.argv[-1] == "publish":
-    os.system("python setup.py sdist upload")
-    sys.exit()
-
-short = "Context managers for database connectivity"
-
 setup(name="conntext",
       version=conntext.__version__,
-      description=short,
-      author="James Sangho Nah",
+      description=("Context managers for secure and atomic "
+                   "database connectivity"),
+      author="James Nah",
       author_email="sangho.nah@gmail.com",
       url="https://github.com/microamp/conntext",
       packages=["conntext"],
-      package_data={"": ["LICENSE", "README.md"]},
+      package_data={"conntext": ["LICENSE", "README.md"]},
       include_package_data=True,
       install_requires=[],
       license=open("LICENSE").read(),
       zip_safe=False,
       classifiers=("Development Status :: 2 - Pre-Alpha",
                    "Intended Audience :: Developers",
-                   "Natural Language :: English",
-                   "License :: OSI Approved :: Apache Software License",
+                   ("License :: OSI Approved :: "
+                    "GNU Lesser General Public License v3 or later (LGPLv3+)"),
+                   "Operating System :: OS Independent",
                    "Programming Language :: Python",
                    "Programming Language :: Python :: 2.7",
                    "Programming Language :: Python :: 3.1",
                    "Programming Language :: Python :: 3.2",
-                   "Programming Language :: Python :: 3.3"))
+                   "Programming Language :: Python :: 3.3",
+                   "Topic :: Software Development :: Libraries",))
