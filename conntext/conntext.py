@@ -7,27 +7,25 @@ logger = getLogger(__name__)
 
 
 @contextmanager
-def conn(connect, *args, **kwargs):
-    conn = connect(*args, **kwargs)
+def conn(conn_):
     try:
-        yield conn
+        yield conn_
     except Exception as e:
-        logger.error(e.message)
-        conn.rollback()
+        logger.error("Error: {0}".format(e.message))
+        conn_.rollback()
         raise
     else:
-        conn.commit()
+        conn_.commit()
     finally:
-        conn.close()
+        conn_.close()
 
 
 @contextmanager
-def cursor(conn):
-    cursor = conn.cursor()
+def cursor(cursor_):
     try:
-        yield cursor
+        yield cursor_
     except Exception as e:
-        logger.error(e.message)
+        logger.error("Error: {0}".format(e.message))
         raise
     finally:
-        cursor.close()
+        cursor_.close()
