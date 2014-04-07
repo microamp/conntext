@@ -11,7 +11,7 @@ def conn(conn_):
     try:
         yield conn_
     except Exception as e:
-        logger.error("Error: {0}".format(e.message))
+        logger.error("Error: {0}".format(e))
         conn_.rollback()
         raise
     else:
@@ -25,7 +25,7 @@ def cursor(cursor_):
     try:
         yield cursor_
     except Exception as e:
-        logger.error("Error: {0}".format(e.message))
+        logger.error("Error: {0}".format(e))
         raise
     finally:
         cursor_.close()
