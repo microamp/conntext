@@ -22,6 +22,7 @@ setup(name="Conntext",
       version=conntext.__version__,
       description=("Context managers for secure and atomic "
                    "database connectivity"),
+      long_description=open("README.md").read(),
       author="James Nah",
       author_email="sangho.nah@gmail.com",
       url="https://github.com/microamp/conntext",
