@@ -38,7 +38,5 @@ setup(name="Conntext",
                    "Operating System :: OS Independent",
                    "Programming Language :: Python",
                    "Programming Language :: Python :: 2.7",
-                   "Programming Language :: Python :: 3.1",
-                   "Programming Language :: Python :: 3.2",
                    "Programming Language :: Python :: 3.3",
                    "Topic :: Software Development :: Libraries",))
