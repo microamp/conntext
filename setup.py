@@ -1,4 +1,4 @@
-## conntext - Context managers for secure and atomic database connectivity
+## Conntext - Context managers for secure and atomic database connectivity
 ## Copyright (C) 2014  James Nah <sangho.nah@gmail.com>
 ##
 ## This library is free software: you can redistribute it and/or
@@ -18,7 +18,7 @@ from setuptools import setup
 
 import conntext
 
-setup(name="conntext",
+setup(name="Conntext",
       version=conntext.__version__,
       description=("Context managers for secure and atomic "
                    "database connectivity"),

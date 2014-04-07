@@ -11,7 +11,7 @@ Goals
 
 Usage
 -----
-```
+```python
 from conntext.conntext import conn, cursor
 import sqlite3 as sqlite
 
