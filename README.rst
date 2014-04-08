@@ -10,7 +10,7 @@ Rationale
 
 Usage
 -----
-Without ``Conntext``,
+Without Conntext,
 
 .. code-block:: python
 
@@ -33,9 +33,11 @@ Without ``Conntext``,
     finally:
         conn.close()
 
-With ``Conntext``,
+With Conntext,
 
 .. code-block:: python
+
+    from conntext import conntext
 
     with conntext.conn(sqlite3.connect(":memory:")) as conn:
         with conntext.cursor(conn) as cursor:
