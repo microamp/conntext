@@ -14,7 +14,7 @@
 ## You should have received a copy of the GNU Lesser General Public
 ## License along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 import conntext
 
@@ -22,15 +22,15 @@ setup(name="Conntext",
       version=conntext.__version__,
       description=("Context managers for secure and atomic "
                    "database connectivity"),
-      long_description=open("README.md").read(),
+      long_description=open("README.rst").read(),
       author="James Nah",
       author_email="sangho.nah@gmail.com",
       url="https://github.com/microamp/conntext",
-      packages=["conntext"],
-      package_data={"conntext": ["LICENSE", "README.md"]},
+      packages=find_packages(),
+      package_data={"conntext": ["LGPL", "README.rst"]},
       include_package_data=True,
       install_requires=[],
-      license=open("LICENSE").read(),
+      license=open("LGPL").read(),
       zip_safe=False,
       classifiers=("Development Status :: 2 - Pre-Alpha",
                    "Intended Audience :: Developers",
