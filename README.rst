@@ -40,7 +40,7 @@ With Conntext,
     from conntext import conntext
 
     with conntext.conn(sqlite3.connect(":memory:")) as conn:
-        with conntext.cursor(conn) as cursor:
+       with conntext.cursor(conn.cursor()) as cursor:
             cursor.execute("CREATE TABLE person (name)")
             cursor.execute("INSERT INTO person (name) VALUES (?)",
                            ["microamp"])
