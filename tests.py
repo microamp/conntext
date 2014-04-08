@@ -1,30 +1,31 @@
 #-*- coding: utf-8 -*-
 
+import os
 import unittest
 import sqlite3 as sqlite
 import logging
+from uuid import uuid4
 
 from conntext.conntext import conn, cursor
 
 logging.disable(logging.ERROR)
 
-TEST_DB = "test.db"
-
 
 class TestConntext(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        with conn(sqlite.connect(TEST_DB)) as conn_:
+        cls.test_db = "test-{0}.db".format(unicode(uuid4()))
+        with conn(sqlite.connect(cls.test_db)) as conn_:
             with cursor(conn_.cursor()) as cursor_:
                 cursor_.execute("DROP TABLE IF EXISTS person")
                 cursor_.execute("CREATE TABLE person (name)")
 
     @classmethod
     def tearDownClass(cls):
-        pass
+        os.remove(cls.test_db)
 
     def setUp(self):
-        with conn(sqlite.connect(TEST_DB)) as conn_:
+        with conn(sqlite.connect(self.test_db)) as conn_:
             with cursor(conn_.cursor()) as cursor_:
                 cursor_.execute("DELETE FROM person")
 
@@ -32,21 +33,21 @@ class TestConntext(unittest.TestCase):
         pass
 
     def test_successful(self):
-        with conn(sqlite.connect(TEST_DB)) as conn_:
+        with conn(sqlite.connect(self.test_db)) as conn_:
             with cursor(conn_.cursor()) as cursor_:
                 cursor_.execute("SELECT name FROM person")
                 self.assertEqual(cursor_.fetchall(), [])
                 cursor_.execute("INSERT INTO person (name) "
                                 "VALUES (?)", ["microamp"])
 
-        with conn(sqlite.connect(TEST_DB)) as conn_:
+        with conn(sqlite.connect(self.test_db)) as conn_:
             with cursor(conn_.cursor()) as cursor_:
                 cursor_.execute("SELECT name FROM person")
                 self.assertEqual(cursor_.fetchall(), [("microamp",)])
 
     def test_failed(self):
         with self.assertRaises(sqlite.OperationalError):
-            with conn(sqlite.connect(TEST_DB)) as conn_:
+            with conn(sqlite.connect(self.test_db)) as conn_:
                 with cursor(conn_.cursor()) as cursor_:
                     cursor_.execute("SELECT name FROM person")
                     self.assertEqual(cursor_.fetchall(), [])
@@ -55,7 +56,7 @@ class TestConntext(unittest.TestCase):
                     cursor_.execute("INSERT INTO people (name) "
                                     "VALUES (?)", ["microamp"])
 
-        with conn(sqlite.connect(TEST_DB)) as conn_:
+        with conn(sqlite.connect(self.test_db)) as conn_:
             with cursor(conn_.cursor()) as cursor_:
                 cursor_.execute("SELECT name FROM person")
                 self.assertEqual(cursor_.fetchall(), [])
