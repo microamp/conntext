@@ -14,7 +14,7 @@ logging.disable(logging.ERROR)
 class TestConntext(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.test_db = "test-{0}.db".format(unicode(uuid4()))
+        cls.test_db = "test-{0}.db".format(uuid4())
         with conn(sqlite.connect(cls.test_db)) as conn_:
             with cursor(conn_.cursor()) as cursor_:
                 cursor_.execute("DROP TABLE IF EXISTS person")
